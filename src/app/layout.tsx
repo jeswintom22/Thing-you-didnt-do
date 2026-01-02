@@ -21,6 +21,9 @@ const greatVibes = Great_Vibes({
 export const metadata: Metadata = {
   title: "Thing you Didn't do",
   description: "Track the things you consciously avoided each day",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
