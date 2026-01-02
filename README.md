@@ -139,7 +139,6 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🙏 Acknowledgments
 
 - Inspired by the concept of tracking avoidance behaviors
-- Design elements inspired by beachhack.in
 - Built with Next.js and modern web technologies
 
 ---
