@@ -7,6 +7,7 @@ import WeeklySummary from '../components/WeeklySummary';
 import Visualization from '../components/Visualization';
 import { getEntries } from '../utils';
 import { AvoidanceEntry } from '../types';
+import AnalyticsCards from '../components/AnalyticsCards';
 
 export default function Tracker() {
   const [entries, setEntries] = useState<AvoidanceEntry[]>([]);
@@ -30,6 +31,8 @@ export default function Tracker() {
             Track your daily avoidances
           </p>
         </header>
+
+        <AnalyticsCards entries={entries} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <AddEntry onAdd={refreshEntries} />
