@@ -1,26 +1,65 @@
 import { AvoidanceEntry } from '../types';
+import { memo } from 'react';
 
-export default function EntryList({ entries }: { entries: AvoidanceEntry[] }) {
+const EntryListComponent = memo(function EntryList({ entries }: { entries: AvoidanceEntry[] }) {
   const recentEntries = entries.slice(-5).reverse(); // last 5, newest first
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today';
+    } else if (date.toDateString() === yesterday.toDateString()) {
+      return 'Yesterday';
+    } else {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+  };
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'rejection': return 'bg-red-500/20 text-red-300 border-red-500/30';
+      case 'uncertainty': return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+      case 'effort': return 'bg-green-500/20 text-green-300 border-green-500/30';
+      default: return 'bg-gray-500/20 text-gray-300 border-gray-500/30';
+    }
+  };
+
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-bold mb-4 text-white">Recent Avoidances</h2>
+    <section className="bg-gray-800 p-6 rounded-lg shadow-lg" aria-labelledby="recent-entries">
+      <h2 id="recent-entries" className="text-xl font-bold mb-6 text-white">Recent Avoidances</h2>
       {recentEntries.length === 0 ? (
-        <p className="text-gray-400">No entries yet. Start tracking!</p>
+        <div className="text-center py-8">
+          <div className="text-4xl mb-4">📝</div>
+          <p className="text-gray-400 mb-2">No entries yet</p>
+          <p className="text-sm text-gray-500">Start tracking your avoidances to see them here</p>
+        </div>
       ) : (
-        <ul className="space-y-3">
+        <ul className="space-y-4" role="list">
           {recentEntries.map((entry) => (
-            <li key={entry.id} className="bg-gray-700 p-4 rounded">
-              <p className="text-white mb-2">{entry.text}</p>
-              <div className="flex justify-between text-sm text-gray-400">
-                <span>{entry.date}</span>
-                <span className="capitalize">{entry.category}</span>
-              </div>
+            <li key={entry.id} className="bg-gray-700 p-4 rounded-md border border-gray-600 hover:border-gray-500 transition-colors">
+              <article>
+                <p className="text-white mb-3 leading-relaxed">{entry.text}</p>
+                <div className="flex items-center justify-between">
+                  <time className="text-sm text-gray-400" dateTime={entry.date}>
+                    {formatDate(entry.date)}
+                  </time>
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full border capitalize ${getCategoryColor(entry.category)}`}>
+                    {entry.category}
+                  </span>
+                </div>
+              </article>
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </section>
   );
-}
+});
+
+EntryListComponent.displayName = 'EntryList';
+
+export default EntryListComponent;
