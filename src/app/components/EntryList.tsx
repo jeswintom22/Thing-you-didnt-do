@@ -39,15 +39,15 @@ const EntryListComponent = memo(function EntryList({ entries }: { entries: Avoid
         </div>
       ) : (
         <ul className="space-y-4" role="list">
-          {recentEntries.map((entry) => (
-            <li key={entry.id} className="bg-gray-700 p-4 rounded-md border border-gray-600 hover:border-gray-500 transition-colors">
+          {recentEntries.map((entry, index) => (
+            <li key={entry.id} className="bg-gray-700 p-4 rounded-md border border-gray-600 hover:border-gray-500 hover:shadow-md transition-all duration-200 hover:translate-y-[-2px] animate-slide-in-right" style={{ animationDelay: `${index * 0.1}s` }}>
               <article>
                 <p className="text-white mb-3 leading-relaxed">{entry.text}</p>
                 <div className="flex items-center justify-between">
                   <time className="text-sm text-gray-400" dateTime={entry.date}>
                     {formatDate(entry.date)}
                   </time>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full border capitalize ${getCategoryColor(entry.category)}`}>
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full border capitalize transition-colors duration-200 hover:bg-opacity-20 ${getCategoryColor(entry.category)}`}>
                     {entry.category}
                   </span>
                 </div>

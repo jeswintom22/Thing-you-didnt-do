@@ -28,7 +28,7 @@ export default function Home() {
           </p>
           <Link
             href="/tracker"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors animate-fade-in animation-delay-1000"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95 animate-fade-in animation-delay-1000"
           >
             Start Tracking →
           </Link>

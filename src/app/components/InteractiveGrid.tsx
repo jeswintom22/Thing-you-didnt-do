@@ -18,7 +18,7 @@ function GridItem({ title, description, count, color }: GridItemProps) {
 
   return (
     <article
-      className={`relative bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border-2 ${color} overflow-hidden focus-within:scale-105 focus-within:shadow-2xl`}
+      className={`relative bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border-2 ${color} overflow-hidden focus-within:scale-105 focus-within:shadow-2xl hover:border-opacity-80`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsFocused(true)}

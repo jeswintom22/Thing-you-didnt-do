@@ -60,7 +60,7 @@ const VisualizationComponent = memo(function Visualization({ entries }: { entrie
           <p className="text-sm text-gray-500">Start tracking avoidances to see trends here</p>
         </div>
       ) : (
-        <div className="h-80">
+        <div className="h-80 animate-fade-in" style={{ animationDuration: '0.5s' }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}

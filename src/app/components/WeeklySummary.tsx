@@ -60,18 +60,18 @@ const WeeklySummaryComponent = memo(function WeeklySummary({ entries }: { entrie
               const isMax = cat === maxCategory && total > 0;
 
               return (
-                <div key={cat} className={`text-center p-3 rounded-lg border-2 transition-all ${isMax ? 'border-blue-500 bg-blue-500/10' : 'border-gray-600'}`}>
-                  <div className={`text-2xl font-bold mb-1 ${isMax ? 'text-blue-400' : 'text-gray-300'}`}>
+                <div key={cat} className={`text-center p-3 rounded-lg border-2 transition-all duration-300 ${isMax ? 'border-blue-500 bg-blue-500/10 animate-pulse-glow' : 'border-gray-600'} hover:scale-105`}>
+                  <div className={`text-2xl font-bold mb-1 transition-colors duration-300 ${isMax ? 'text-blue-400' : 'text-gray-300'}`}>
                     {count}
                   </div>
                   <div className="text-sm text-gray-400 capitalize mb-2">{cat}</div>
-                  <div className="w-full bg-gray-600 rounded-full h-2">
+                  <div className="w-full bg-gray-600 rounded-full h-2 overflow-hidden">
                     <div
-                      className={`h-2 rounded-full transition-all duration-500 ${isMax ? 'bg-blue-500' : 'bg-gray-500'}`}
+                      className={`h-2 rounded-full transition-all duration-1000 ease-out ${isMax ? 'bg-blue-500' : 'bg-gray-500'}`}
                       style={{ width: `${percentage}%` }}
                     ></div>
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">{percentage}%</div>
+                  <div className="text-xs text-gray-500 mt-1 transition-opacity duration-300">{percentage}%</div>
                 </div>
               );
             })}
