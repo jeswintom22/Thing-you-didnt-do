@@ -1,146 +1,78 @@
 # Thing you Didn't do
 
-A modern web application for tracking the things you consciously avoid each day. Instead of focusing on what you did accomplish, this app helps you quantify and understand your avoidance patterns across different fear types.
+A local-first avoidance tracker that helps you log the things you kept postponing, group them by fear type, and review the patterns that show up over time.
 
-![Thing you Didn't do](https://img.shields.io/badge/Next.js-16.1.1-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC)
+![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC)
 
-## 🌟 Features
+## What changed
 
-### Core Functionality
-- **Daily Avoidance Tracking**: Add one thing you avoided each day with detailed descriptions
-- **Fear Type Categorization**: Classify avoidances into Rejection, Uncertainty, or Effort
-- **Weekly Pattern Analysis**: Get insights into your avoidance behaviors over time
-- **Data Visualization**: Interactive charts showing avoidance trends across categories
+- Landing page now uses a fuller editorial layout with stronger hierarchy and a clearer call to action.
+- Tracker page now has a more polished dashboard shell with softer cards and better spacing.
+- Global styling adds a richer atmospheric background and shared glass-like surfaces.
+- Metadata now reads optional app name and description values from the environment.
 
-### User Experience
-- **Beautiful Landing Page**: Animated introduction with elegant typography and smooth transitions
-- **Interactive Dashboard**: Hover effects and real-time statistics on the home page
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Dark Theme**: Modern dark UI with vibrant accents inspired by beachhack.in
-- **Local Storage**: All data persists locally in your browser
+## Features
 
-## 🚀 Getting Started
+- Daily avoidance logging with rejection, uncertainty, and effort categories
+- Recent entries, weekly summary, and trend visualization
+- Local browser storage only; no server required
+- Responsive layout for desktop and mobile
+
+## Getting Started
 
 ### Prerequisites
-- Node.js 18.0 or later
+
+- Node.js 18 or later
 - npm, yarn, pnpm, or bun
 
-### Installation
+### Install
 
-1. Clone the repository:
-```bash
-git clone https://github.com/jeswintom22/Thing-you-didnt-do.git
-cd thing-you-didnt-do-app
-```
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Copy [.env.example](.env.example) to [.env.local](.env.local) if you want to override the default app name or description.
+4. Start the development server with `npm run dev`.
+5. Open [http://localhost:3000](http://localhost:3000).
 
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+## Environment
 
-3. Run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+The app supports these optional variables:
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+- `NEXT_PUBLIC_APP_NAME`
+- `NEXT_PUBLIC_APP_DESCRIPTION`
 
-## 📱 Usage
+If they are not set, the app uses the built-in defaults.
 
-### Landing Page
-- View your overall avoidance statistics in the interactive grid
-- See counts for each fear category
-- Click "Start Tracking →" to access the tracker
+## Scripts
 
-### Tracker Page
-- **Add Entry**: Fill in what you avoided and select the fear type
-- **View Entries**: See your recent avoidances with dates and categories
-- **Weekly Summary**: Get insights about your avoidance patterns
-- **Visualization**: Analyze trends with interactive bar charts
+- `npm run dev` - Start the development server
+- `npm run build` - Create a production build
+- `npm run lint` - Run ESLint
+- `npm test` - Run the Jest suite
 
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 16 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Charts**: Recharts
-- **Fonts**: Google Fonts (Great Vibes, Geist)
-- **State Management**: React hooks with local storage
-- **Animations**: Custom CSS keyframes
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-thing-you-didnt-do-app/
-├── src/
-│   ├── app/
-│   │   ├── components/          # Reusable UI components
-│   │   │   ├── AddEntry.tsx     # Form for adding avoidances
-│   │   │   ├── EntryList.tsx    # List of recent entries
-│   │   │   ├── InteractiveGrid.tsx # Landing page grid
-│   │   │   ├── Visualization.tsx # Charts component
-│   │   │   └── WeeklySummary.tsx # Summary component
-│   │   ├── tracker/             # Tracker page route
-│   │   │   └── page.tsx
-│   │   ├── globals.css          # Global styles & animations
-│   │   ├── layout.tsx           # Root layout
-│   │   ├── page.tsx             # Landing page
-│   │   ├── types.ts             # TypeScript type definitions
-│   │   └── utils.ts             # Utility functions
-│   └── ...
-├── public/                      # Static assets
-├── package.json
-└── README.md
+src/
+	app/
+		components/
+		tracker/
+		globals.css
+		layout.tsx
+		page.tsx
+		types.ts
+		utils.ts
+	lib/
+		storage.ts
 ```
 
-## 🎨 Design Inspiration
+## Validation
 
-The app's design is inspired by [beachhack.in](https://www.beachhack.in/), featuring:
-- Dark gradient backgrounds
-- Smooth animations and transitions
-- Interactive hover effects
-- Modern typography with script fonts
-- Scrolling marquee elements
+After UI changes, the recommended check order is:
 
-## 🚀 Deployment
+1. `npm run lint`
+2. `npm test`
+3. `npm run build`
 
-### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Deploy automatically on every push
-3. Get a live URL instantly
+## Deployment
 
-### Other Platforms
-The app can be deployed to any platform supporting Next.js:
-- Netlify
-- Railway
-- Render
-- Self-hosted with Docker
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes and commit: `git commit -m 'Add feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- Inspired by the concept of tracking avoidance behaviors
-- Built with Next.js and modern web technologies
-
----
-
-**Track your fears, face your growth.** 🌊
+The app can be deployed to any platform that supports Next.js, including Vercel, Netlify, Railway, and Render.

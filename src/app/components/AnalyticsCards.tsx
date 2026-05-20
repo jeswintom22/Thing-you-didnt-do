@@ -16,7 +16,7 @@ const AnalyticsCardsComponent = memo(function AnalyticsCards({ entries }: { entr
 
   // Calculate streak
   let streak = 0;
-  let checkDate = new Date(today);
+  const checkDate = new Date(today);
   for (let i = 0; i < 365; i++) {
     const dateStr = checkDate.toISOString().split('T')[0];
     const hasEntry = entries.some(e => e.date === dateStr);
@@ -41,16 +41,22 @@ const AnalyticsCardsComponent = memo(function AnalyticsCards({ entries }: { entr
 
   // Overall insights
   const total = entries.length;
-  const avgPerDay = total > 0 ? (total / Math.max(1, Math.ceil((new Date().getTime() - new Date(entries[0]?.date || today).getTime()) / (1000 * 60 * 60 * 24)))).toFixed(1) : '0';
+  const earliestEntry = entries
+    .map((entry) => new Date(`${entry.date}T00:00:00`))
+    .sort((a, b) => a.getTime() - b.getTime())[0];
+  const elapsedDays = earliestEntry
+    ? Math.max(1, Math.ceil((new Date(todayStr).getTime() - earliestEntry.getTime()) / (1000 * 60 * 60 * 24)) + 1)
+    : 1;
+  const avgPerDay = total > 0 ? (total / elapsedDays).toFixed(1) : '0';
 
   if (total === 0) {
     return (
       <section className="mb-8" aria-labelledby="analytics-title">
-        <h2 id="analytics-title" className="text-xl font-bold mb-4 text-white">Insights</h2>
-        <div className="bg-gradient-to-br from-gray-800 to-gray-750 p-8 rounded-lg border border-gray-700 text-center">
+        <h2 id="analytics-title" className="text-xl font-semibold mb-4 text-white">Insights</h2>
+        <div className="rounded-[2rem] border border-white/10 bg-white/6 p-8 text-center shadow-2xl shadow-slate-950/20 backdrop-blur-xl">
           <div className="text-5xl mb-4">📚</div>
-          <p className="text-gray-400 text-lg">Start tracking to see your patterns</p>
-          <p className="text-gray-500 text-sm mt-2">Each avoidance you log reveals patterns about what holds you back</p>
+          <p className="text-lg text-slate-200/85">Start tracking to see your patterns</p>
+          <p className="mt-2 text-sm text-slate-400/80">Each avoidance you log reveals patterns about what holds you back</p>
         </div>
       </section>
     );
@@ -58,23 +64,23 @@ const AnalyticsCardsComponent = memo(function AnalyticsCards({ entries }: { entr
 
   return (
     <section className="mb-8" aria-labelledby="analytics-title">
-      <h2 id="analytics-title" className="text-xl font-bold mb-6 text-white">Insights</h2>
+      <h2 id="analytics-title" className="text-xl font-semibold mb-6 text-white">Insights</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {/* Tracking Streak */}
-        <article className="bg-gradient-to-br from-gray-800 to-gray-750 p-6 rounded-lg border border-gray-700 hover:border-blue-500/50 transition-colors duration-300">
+        <article className="rounded-[1.75rem] border border-white/10 bg-white/6 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl transition-colors duration-300 hover:border-sky-300/30">
           <div className="flex items-start justify-between mb-3">
-            <h3 className="text-sm font-medium text-gray-400">Tracking Streak</h3>
+            <h3 className="text-sm font-medium text-slate-300/80">Tracking Streak</h3>
             <span className="text-2xl">🔥</span>
           </div>
           <div className="text-3xl font-bold text-white mb-1">{streak}</div>
-          <p className="text-xs text-gray-500">days tracking avoidances</p>
+          <p className="text-xs text-slate-400/80">days tracking avoidances</p>
         </article>
 
         {/* Today's Activity */}
-        <article className="bg-gradient-to-br from-gray-800 to-gray-750 p-6 rounded-lg border border-gray-700 hover:border-green-500/50 transition-colors duration-300">
+        <article className="rounded-[1.75rem] border border-white/10 bg-white/6 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl transition-colors duration-300 hover:border-emerald-300/30">
           <div className="flex items-start justify-between mb-3">
-            <h3 className="text-sm font-medium text-gray-400">Today</h3>
+            <h3 className="text-sm font-medium text-slate-300/80">Today</h3>
             <span className="text-2xl">📝</span>
           </div>
           <div className="text-3xl font-bold text-white mb-1">{todayEntries.length}</div>
@@ -87,32 +93,32 @@ const AnalyticsCardsComponent = memo(function AnalyticsCards({ entries }: { entr
         </article>
 
         {/* Overall Average */}
-        <article className="bg-gradient-to-br from-gray-800 to-gray-750 p-6 rounded-lg border border-gray-700 hover:border-purple-500/50 transition-colors duration-300">
+        <article className="rounded-[1.75rem] border border-white/10 bg-white/6 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl transition-colors duration-300 hover:border-violet-300/30">
           <div className="flex items-start justify-between mb-3">
-            <h3 className="text-sm font-medium text-gray-400">Average</h3>
+            <h3 className="text-sm font-medium text-slate-300/80">Average</h3>
             <span className="text-2xl">📊</span>
           </div>
           <div className="text-3xl font-bold text-white mb-1">{avgPerDay}</div>
-          <p className="text-xs text-gray-500">avoidances per day</p>
+          <p className="text-xs text-slate-400/80">avoidances per day</p>
         </article>
       </div>
 
       {/* Most Frequent Avoidances */}
       {topItems.length > 0 && (
-        <article className="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h3 className="text-sm font-medium text-gray-400 mb-4">Recurring Patterns</h3>
+        <article className="rounded-[2rem] border border-white/10 bg-white/6 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl">
+          <h3 className="text-sm font-medium text-slate-300/80 mb-4">Recurring Patterns</h3>
           <ul className="space-y-3">
             {topItems.map((item, index) => (
-              <li key={index} className="flex items-start gap-3 p-3 bg-gray-750 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+              <li key={index} className="flex items-start gap-3 rounded-2xl border border-white/8 bg-white/5 p-4 transition-colors duration-200 hover:bg-white/8">
                 <span className="text-lg">{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-white text-sm break-words">{item[0]}</p>
-                  <p className="text-xs text-gray-500 mt-1">{item[1]} time{item[1] > 1 ? 's' : ''}</p>
+                  <p className="text-xs text-slate-400/80 mt-1">{item[1]} time{item[1] > 1 ? 's' : ''}</p>
                 </div>
               </li>
             ))}
           </ul>
-          <p className="text-xs text-gray-500 mt-4 italic">Notice what patterns emerge. They point to your deepest fears.</p>
+          <p className="mt-4 text-xs italic text-slate-400/80">Notice what patterns emerge. They point to your deepest fears.</p>
         </article>
       )}
     </section>

@@ -21,11 +21,15 @@ const AddEntryComponent = memo(function AddEntry({ onAdd }: { onAdd: () => void 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-bold mb-6 text-white">Add Today's Avoidance</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-[2rem] border border-white/10 bg-white/6 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl"
+    >
+      <h2 className="text-xl font-semibold mb-2 text-white">Add Today&apos;s Avoidance</h2>
+      <p className="mb-6 text-sm text-slate-300/80">Keep it specific enough that future-you can recognize the moment instantly.</p>
       <div className="space-y-4">
         <div>
-          <label htmlFor="avoidance-text" className="block text-sm font-medium text-gray-300 mb-2">
+          <label htmlFor="avoidance-text" className="block text-sm font-medium text-slate-200 mb-2">
             What did you consciously avoid today?
           </label>
           <textarea
@@ -33,43 +37,43 @@ const AddEntryComponent = memo(function AddEntry({ onAdd }: { onAdd: () => void 
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="e.g., Didn't send the email I was scared of..."
-            className="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 resize-none focus:scale-[1.02]"
+            className="w-full rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-white placeholder:text-slate-400/70 focus:border-sky-300/60 focus:outline-none focus:ring-2 focus:ring-sky-400/30 transition-all duration-200 resize-none"
             rows={3}
             required
             aria-describedby="text-help"
           />
-          <p id="text-help" className="text-xs text-gray-400 mt-1">
+          <p id="text-help" className="mt-2 text-xs text-slate-400/80">
             Be specific about what you avoided and why
           </p>
         </div>
         <div>
-          <label htmlFor="fear-category" className="block text-sm font-medium text-gray-300 mb-2">
+          <label htmlFor="fear-category" className="block text-sm font-medium text-slate-200 mb-2">
             Fear Category
           </label>
           <select
             id="fear-category"
             value={category}
             onChange={(e) => setCategory(e.target.value as FearType)}
-            className="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 focus:scale-[1.02]"
+            className="w-full rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-white focus:border-sky-300/60 focus:outline-none focus:ring-2 focus:ring-sky-400/30 transition-all duration-200"
             aria-describedby="category-help"
           >
             <option value="rejection">Rejection - Fear of disapproval</option>
             <option value="uncertainty">Uncertainty - Fear of unknown outcomes</option>
             <option value="effort">Effort - Avoidance of hard work</option>
           </select>
-          <p id="category-help" className="text-xs text-gray-400 mt-1">
+          <p id="category-help" className="mt-2 text-xs text-slate-400/80">
             Choose the primary fear that held you back
           </p>
         </div>
         <button
           type="submit"
           disabled={!text.trim()}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 active:scale-95 active:bg-blue-800"
+          className="w-full rounded-2xl bg-white px-4 py-3 font-semibold text-slate-950 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sky-100 disabled:cursor-not-allowed disabled:bg-white/20 disabled:text-slate-300/70"
           aria-describedby="submit-help"
         >
           Add Entry
         </button>
-        <p id="submit-help" className="text-xs text-gray-400 text-center">
+        <p id="submit-help" className="text-center text-xs text-slate-400/80">
           {!text.trim() ? 'Enter your avoidance to enable submission' : 'Your entry will be saved locally'}
         </p>
       </div>

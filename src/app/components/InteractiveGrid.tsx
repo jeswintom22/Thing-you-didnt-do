@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, memo } from 'react';
-import { FearType } from '../types';
+import { AvoidanceEntry } from '../types';
 
 interface GridItemProps {
   title: string;
@@ -48,7 +48,7 @@ function GridItem({ title, description, count, color }: GridItemProps) {
   );
 }
 
-const InteractiveGridComponent = memo(function InteractiveGrid({ entries }: { entries: any[] }) {
+const InteractiveGridComponent = memo(function InteractiveGrid({ entries }: { entries: AvoidanceEntry[] }) {
   const rejectionCount = entries.filter(e => e.category === 'rejection').length;
   const uncertaintyCount = entries.filter(e => e.category === 'uncertainty').length;
   const effortCount = entries.filter(e => e.category === 'effort').length;

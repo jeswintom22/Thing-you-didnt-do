@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #07111f;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
@@ -14,10 +14,34 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.12), transparent 28%),
+    radial-gradient(circle at bottom, rgba(168, 85, 247, 0.16), transparent 35%),
+    linear-gradient(135deg, #07111f 0%, #0b1b2f 45%, #10253f 100%);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 88px 88px;
+  opacity: 0.12;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.35);
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Great_Vibes } from "next/font/google";
 import "./globals.css";
 
+const siteName = process.env.NEXT_PUBLIC_APP_NAME ?? "Thing you Didn't do";
+const siteDescription =
+  process.env.NEXT_PUBLIC_APP_DESCRIPTION ??
+  "Track the things you consciously avoided each day";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,8 +24,11 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Thing you Didn't do",
-  description: "Track the things you consciously avoided each day",
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
   icons: {
     icon: "/favicon.svg",
   },
